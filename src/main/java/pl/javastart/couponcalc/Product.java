@@ -24,4 +24,8 @@ public class Product {
         return category;
     }
 
+    public double priceAfterDiscount(Coupon coupon) {
+        return price - (price * coupon.getDiscountValueInPercents() / 100);
+    }
+
 }
