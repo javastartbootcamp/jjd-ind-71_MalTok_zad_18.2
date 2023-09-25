@@ -24,4 +24,11 @@ public class Product {
         return category;
     }
 
+    public double priceAfterDiscount(Coupon coupon) {
+        if (coupon == null || coupon.getCategory() != category) {
+            return price;
+        }
+        return price - (price * coupon.getDiscountValueInPercents() / 100);
+    }
+
 }
