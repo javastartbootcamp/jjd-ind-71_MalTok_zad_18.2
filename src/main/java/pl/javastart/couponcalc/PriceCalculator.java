@@ -12,15 +12,9 @@ public class PriceCalculator {
             return 0;
         }
 
-        double priceTotalSum;
+        double priceTotalSum = calculateTotalPriceIfNoCoupons(products);
 
-        if (coupons == null || coupons.isEmpty()) {
-            priceTotalSum = calculateTotalPriceIfNoCoupons(products);
-        } else if (coupons.size() == 1) {
-            Coupon coupon = coupons.get(0);
-            priceTotalSum = calculateTotalPriceForOneCoupon(products, coupon);
-        } else {
-            priceTotalSum = calculateTotalPriceIfNoCoupons(products);
+        if (coupons != null && !coupons.isEmpty()) {
             for (Coupon coupon : coupons) {
                 double sum = calculateTotalPriceForOneCoupon(products, coupon);
                 if (sum < priceTotalSum) {
