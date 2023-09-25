@@ -32,22 +32,10 @@ public class PriceCalculator {
     }
 
     private double calculateTotalPriceForOneCoupon(List<Product> products, Coupon coupon) {
-        Category category = coupon.getCategory();
-        if (category == null) {
-            return products.stream()
+        return products.stream()
                     .map(product -> product.priceAfterDiscount(coupon))
                     .reduce(0.0, Double::sum);
-        } else {
-            double sumPricesOfProductsWithDiscount = products.stream()
-                    .filter(product -> product.getCategory().equals(category))
-                    .map(product -> product.priceAfterDiscount(coupon))
-                    .reduce(0.0, Double::sum);
-            double sumPricesOfProductsWithoutDiscount = products.stream()
-                    .filter(product -> !product.getCategory().equals(category))
-                    .map(Product::getPrice)
-                    .reduce(0.0, Double::sum);
-            return sumPricesOfProductsWithDiscount + sumPricesOfProductsWithoutDiscount;
-        }
+
     }
 
     private double roundResult(double price) {
